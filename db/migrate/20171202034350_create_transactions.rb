@@ -6,6 +6,7 @@ class CreateTransactions < ActiveRecord::Migration[5.1]
       t.money      :total_price, default: 0
       t.string     :state
       t.string     :type
+      t.string     :code
       t.string     :aasm_state
 
       t.timestamps

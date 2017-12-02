@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202035008) do
+ActiveRecord::Schema.define(version: 20171202064132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.money "balance", scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "api_keys", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +47,7 @@ ActiveRecord::Schema.define(version: 20171202035008) do
     t.string "name"
     t.string "code"
     t.string "description"
+    t.integer "quantity"
     t.string "picture"
     t.money "price", scale: 2
     t.string "type"
@@ -62,6 +71,7 @@ ActiveRecord::Schema.define(version: 20171202035008) do
     t.money "total_price", scale: 2, default: "0.0"
     t.string "state"
     t.string "type"
+    t.string "code"
     t.string "aasm_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -26,15 +26,17 @@ class Api::V1::TransactionsController < Api::BaseController
   end
 
   def checkout
-    @transaction = Transaction.find(params[:transaction_id])
+    @transaction = Transaction.find_by_code!(params[:transaction_code])
     @transaction.finish!
-    json_response(@transaction)
+    response = @transaction.errors.present? ?
+                 @transaction.errors.as_json : @transaction
+    json_response(response)
   end
 
   private
 
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.find(params[:id] || params[:transaction_id])
   end
 
   def transaction_params

@@ -18,6 +18,6 @@ class Api::V1::StoresController < Api::BaseController
   private
 
   def set_store
-    @store = Store.find(params[:id])
+    @store = Store.find(params[:id] || params[:store_id])
   end
 end

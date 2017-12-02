@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   has_many :items
   belongs_to :store
 
-  before_validation :add_product_code
+  before_validation :add_product_code, on: :create
 
   private
 
