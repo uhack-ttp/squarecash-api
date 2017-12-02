@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20171202035008) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
+    t.string "description"
+    t.string "picture"
     t.money "price", scale: 2
     t.string "type"
     t.bigint "store_id"
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20171202035008) do
     t.money "total_price", scale: 2, default: "0.0"
     t.string "state"
     t.string "type"
+    t.string "aasm_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_transactions_on_customer_id"

@@ -25,6 +25,13 @@ class Api::V1::UsersController < Api::BaseController
     head :no_content
   end
 
+  def active_transaction
+    @user = Customer.find(params[:user_id])
+    @transaction = @user.active_transaction || {}
+
+    json_response(@transaction)
+  end
+
   private
 
   def set_user
