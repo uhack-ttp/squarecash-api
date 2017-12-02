@@ -1,0 +1,103 @@
+# Files
+*.env
+*.bak
+
+
+# Rails
+.bundle
+db/structure.sql
+db/*.sqlite3
+db/*.sqlite3-journal
+*.log
+tmp
+tmp/**/*
+dumps/*
+config/database.yml
+
+# Documentation
+doc/api
+doc/app
+.yardoc
+.yardopts
+coverage
+coverage/*
+
+# Public Uploads
+public/system/*
+
+# Public Cache
+public/javascripts/cache
+public/stylesheets/cache
+public/uploads
+
+# Bower
+vendor/assets/bower_components
+
+# Vendor Cache
+vendor/cache
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# NetBeans
+nbproject
+
+# Eclipse
+.project
+
+# Redcar
+.redcar
+
+# Rubinius
+*.rbc
+
+# Vim
+*.swp
+*.swo
+
+# RubyMine
+.idea
+
+# E-texteditor
+.eprj
+
+# Other
+.cache
+.config
+.fontconfig
+.local
+.pki
+
+# Backup
+*~
+
+# Capybara Bug
+capybara-*html
+
+# sass
+.sass-cache
+.sass-cache/*
+
+#rvm
+#.rvmrc
+#.rvmrc.*
+
+
+# Enviroment Variables
+.env.demo
+.env.beta
+local.env
+local.env.backup
+
+# rbenv
+.rbenv-version
+
+# Local Gemfile for developing without sharing dependencies
+.gemfile
+
+# redis
+*.rdb
+*.out
