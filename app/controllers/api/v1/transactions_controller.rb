@@ -25,6 +25,12 @@ class Api::V1::TransactionsController < Api::BaseController
     head :no_content
   end
 
+  def checkout
+    @transaction = Transaction.find(params[:transaction_id])
+    @transaction.finish!
+    json_response(@transaction)
+  end
+
   private
 
   def set_transaction

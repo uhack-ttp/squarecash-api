@@ -6,6 +6,7 @@ gem 'puma', '~> 3.7'
 
 # Database
 gem 'pg', '~> 0.21.0'
+gem 'aasm', '~> 4.10.1'
 
 # Authentication / Authorization
 gem 'devise', '~> 4.3.0'

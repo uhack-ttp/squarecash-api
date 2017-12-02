@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.10.1)
     actioncable (5.1.4)
       actionpack (= 5.1.4)
       nio4r (~> 2.0)
@@ -163,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (~> 4.10.1)
   awesome_print (~> 1.8.0)
   byebug (~> 9.1.0)
   devise (~> 4.3.0)
