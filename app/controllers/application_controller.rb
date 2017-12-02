@@ -1,3 +1,12 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  include Response
+  include ExceptionHandler
+
+  protect_from_forgery unless: -> { request.format.json? }
+
+  private
+
+  def do_not_set_cookie
+    request.session_options[:skip] = true
+  end
 end
