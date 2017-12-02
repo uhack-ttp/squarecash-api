@@ -1,0 +1,8 @@
+---
+:concurrency: 1
+:queues:
+  - default
+  - mailers
+
+  - squarecash-api_default
+  - squarecash-api_mailers

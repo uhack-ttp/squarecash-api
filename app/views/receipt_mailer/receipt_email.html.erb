@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        height: 100%;
+        width: 100%;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .receipt {
+        max-width: 320px;
+        width: 100%;
+        margin: 20px;
+        border: solid 1px #cccccc;
+        padding: 32px 30px 76px;
+      }
+
+      h1 {
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: center;
+        color: rgba(53, 52, 61, 0.75);
+        margin-bottom: 32px;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 22px;
+      }
+
+      .meta > .text {
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: left;
+        color: rgba(53, 52, 61, 0.75);
+      }
+
+      .meta > .date {
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: right;
+        color: rgba(53, 52, 61, 0.75);
+      }
+
+      .list-title {
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: left;
+        color: rgba(53, 52, 61, 0.75);
+        margin-bottom: 8px;
+      }
+
+      .item-list {
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: left;
+        color: rgba(53, 52, 61, 0.75);
+        margin-bottom: 8px;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+
+      .item > .name {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 2.1;
+        text-align: left;
+        color: rgba(53, 52, 61, 0.75);
+      }
+
+      .item > .price {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 2.1;
+        text-align: right;
+        color: rgba(53, 52, 61, 0.75);
+      }
+
+      .total {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+      }
+
+      .total > .text {
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: left;
+        color: rgba(53, 52, 61, 0.75);
+      }
+
+      .total > .price {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 2.1;
+        text-align: right;
+        color: rgba(53, 52, 61, 0.75);
+      }
+
+      h3 {
+        font-size: 16px;
+        line-height: 2.1;
+        text-align: center;
+        color: rgba(53, 52, 61, 0.75);
+      }
+    </style>
+  </head>
+  <body>
+  <div class="receipt">
+    <h1><%= @transaction.store.try(:name) %></h1>
+    <section class="meta">
+      <h2 class="text">Date:</h2>
+      <h2 class="date"><%= @transaction.updated_at.strftime("%b %d, %Y") %></h2>
+    </section>
+    <section class="list">
+      <h2 class="list-title">Item list</h2>
+      <% @transaction.items.each do |i| %>
+        <div class="item">
+          <p class="name"><%= i.product.name %> x <%= i.quantity %></p>
+          <p class="price">Php <%= number_with_precision(i.price, precision: 2) %></p>
+        </div>
+      <% end %>
+      <div class="total">
+        <p class="text">Total</p>
+        <p class="price">Php <%= number_with_precision(@transaction.total_price, precision: 2)  %></p>
+      </div>
+    </section>
+    <section>
+      <h3>Thank you and come again!</h3>
+    </section>
+  </div>
+  </body>
+</html>

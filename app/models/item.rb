@@ -19,6 +19,6 @@ class Item < ApplicationRecord
   end
 
   def return_stocks_to_product
-    product.increment(:quantity, quantity).save!
+    product.increment(:quantity, self.quantity).save!
   end
 end

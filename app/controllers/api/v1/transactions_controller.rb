@@ -7,7 +7,11 @@ class Api::V1::TransactionsController < Api::BaseController
   end
 
   def show
-    json_response(@transaction)
+    if @transaction.is_a? Cart
+      json_response(cart_items)
+    else
+      json_response(@transaction)
+    end
   end
 
   def create
@@ -33,6 +37,11 @@ class Api::V1::TransactionsController < Api::BaseController
     json_response(response)
   end
 
+  def get_bill
+    @transaction = Transaction.find_by_code!(params[:transaction_code])
+    json_response({transaction: @transaction, store: @transaction.store}, :ok)
+  end
+
   private
 
   def set_transaction
@@ -41,5 +50,12 @@ class Api::V1::TransactionsController < Api::BaseController
 
   def transaction_params
     params.require(:transaction).permit!
+  end
+
+  def cart_items
+    items = @transaction.items.each.map do |i|
+      {item: i, product: i.product}
+    end
+    { cart: @transaction, items: items }
   end
 end

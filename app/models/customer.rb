@@ -3,7 +3,7 @@ class Customer < User
   has_one  :account, as: :owner
 
   def active_transaction
-    transactions.where(aasm_state: 'active').last
+    transactions.where(aasm_state: 'active', type: 'Cart').last
   end
 
   def balance

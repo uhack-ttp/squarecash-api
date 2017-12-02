@@ -1,5 +1,5 @@
 class Api::V1::StoresController < Api::BaseController
-  before_action :set_store, only: [:show, :products]
+  before_action :set_store, only: [:show, :products, :transactions]
 
   def index
     @stores = Store.all
@@ -13,6 +13,11 @@ class Api::V1::StoresController < Api::BaseController
   def products
     @products = @store.products
     json_response(@products)
+  end
+
+  def transactions
+    @transactions = @store.transactions
+    json_response(@transactions)
   end
 
   private

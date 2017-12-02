@@ -5,6 +5,7 @@ class Transaction < ApplicationRecord
   belongs_to :store, required: false
 
   before_save :update_user_and_store_admin_accounts
+  after_update :send_email_if_done
   validate :customer_must_have_enough_balance
 
   aasm do
@@ -21,6 +22,11 @@ class Transaction < ApplicationRecord
   def customer_must_have_enough_balance
     return true if customer.balance >= total_price
     errors.add(:customer, message: "customer doesn't have enough balance")
+  end
+
+  def send_email_if_done
+    return false if self.active?
+    ReceiptMailer.receipt_email(id).deliver_later
   end
 
   def update_user_and_store_admin_accounts
