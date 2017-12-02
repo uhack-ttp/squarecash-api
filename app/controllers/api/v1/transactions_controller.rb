@@ -31,7 +31,7 @@ class Api::V1::TransactionsController < Api::BaseController
 
   def checkout
     @transaction = Transaction.find_by_code!(params[:transaction_code])
-    @transaction.finish!
+    @transaction.finish! if @transaction.active?
     response = @transaction.errors.present? ?
                  @transaction.errors.as_json : @transaction
     json_response(response)
@@ -56,6 +56,6 @@ class Api::V1::TransactionsController < Api::BaseController
     items = @transaction.items.each.map do |i|
       {item: i, product: i.product}
     end
-    { cart: @transaction, items: items }
+    { cart: @transaction, items: items, total_quantity: @transaction.items.to_a.sum(&:quantity) }
   end
 end

@@ -133,15 +133,17 @@
     <h1><%= @transaction.store.try(:name) %></h1>
     <section class="meta">
       <h2 class="text">Date:</h2>
-      <h2 class="date"><%= @transaction.updated_at.strftime("%b %d, %Y") %></h2>
+      <h2 class="date"><%= @transaction.updated_at %></h2>
     </section>
     <section class="list">
-      <h2 class="list-title">Item list</h2>
-      <% @transaction.items.each do |i| %>
-        <div class="item">
-          <p class="name"><%= i.product.name %> x <%= i.quantity %></p>
-          <p class="price">Php <%= number_with_precision(i.price, precision: 2) %></p>
-        </div>
+      <% if @transaction.is_a?(Cart) %>
+        <h2 class="list-title">Item list</h2>
+        <% @transaction.items.each do |i| %>
+          <div class="item">
+            <p class="name"><%= i.product.name %> x <%= i.quantity %></p>
+            <p class="price">Php <%= number_with_precision(i.price, precision: 2) %></p>
+          </div>
+        <% end %>
       <% end %>
       <div class="total">
         <p class="text">Total</p>

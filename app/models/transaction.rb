@@ -17,6 +17,10 @@ class Transaction < ApplicationRecord
     end
   end
 
+  def updated_at
+    self[:updated_at].strftime("%b %d, %Y")
+  end
+
   protected
 
   def customer_must_have_enough_balance
