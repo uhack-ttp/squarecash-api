@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202035008) do
+ActiveRecord::Schema.define(version: 20171202034350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,45 +24,24 @@ ActiveRecord::Schema.define(version: 20171202035008) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "items", force: :cascade do |t|
-    t.bigint "transaction_id"
-    t.bigint "product_id"
-    t.money "price", scale: 2
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_items_on_product_id"
-    t.index ["transaction_id"], name: "index_items_on_transaction_id"
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.money "price", scale: 2
-    t.string "type"
-    t.bigint "store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_products_on_store_id"
-  end
-
   create_table "stores", force: :cascade do |t|
     t.string "name"
-    t.bigint "store_owner_id"
+    t.bigint "store_admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["store_owner_id"], name: "index_stores_on_store_owner_id"
+    t.index ["store_admin_id"], name: "index_stores_on_store_admin_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "customer_id"
     t.bigint "store_id"
     t.money "total_price", scale: 2, default: "0.0"
     t.string "state"
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_transactions_on_customer_id"
     t.index ["store_id"], name: "index_transactions_on_store_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,2 @@
+class StoreCashier < User
+end
